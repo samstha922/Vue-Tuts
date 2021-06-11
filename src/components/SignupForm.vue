@@ -29,7 +29,7 @@
             <label for="">Skills:</label>
             <input type="text" v-model="tempSkill" v-on:keyup="addskill">
             <div v-for="skill in skills">
-                {{skill}}
+                <p @click="removeSkill(skill)">{{skill}}</p>
             </div>
         </div>
     </form> 
@@ -59,6 +59,7 @@ export default {
         addskill(e){
             // check if tempSkill has some value in it
             if(e.key === ',' && this.tempSkill){
+                
                 // removes the comma that appears with text
                 this.tempSkill = this.tempSkill.replace(/,/g,"")
                 // prevents duplication of data in array
@@ -69,6 +70,13 @@ export default {
                 // resetting the input in array
                 this.tempSkill = ''
             }
+        },
+        removeSkill(skill){
+            // es6 way to remove an item from list
+            this.skills = this.skills.filter(item => item !== skill)
+            //---- pop only removes the latest item in the queue
+            // this.skills.pop() 
+            console.log(this.skills);
         }
     }
 }
